@@ -1,0 +1,15 @@
+[
+    {
+      "username": "admin1",
+      "role": "admin"
+    },
+    {
+      "username": "manager1",
+      "role": "store_manager"
+    },
+    {
+      "username": "supplier1",
+      "role": "supplier"
+    }
+  ]
+  

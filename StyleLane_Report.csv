@@ -1,0 +1,12 @@
+Users
+Username,Role
+
+Inventory
+ProductID,ProductName,Quantity,StoreID,SupplierID,ThresholdQty
+P001,Denim Jacket,2,S001,SUP01,5
+
+Shipments
+ShipmentID,ProductID,Quantity,SupplierID,StoreID,Status
+SHIP9945,ZARA0123,10,SUP01,S001,Pending
+SHIP9988,ZARA0123,50,SUP01,S001,
+SHIP9983,ZARA0123,50,SUP01,S001,

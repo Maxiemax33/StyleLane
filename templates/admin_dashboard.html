@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - StyleLane</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f4f8;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background: #3b3054;
+      color: white;
+      padding: 20px 40px;
+      font-size: 24px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+    .header img {
+      height: 40px;
+      margin-right: 15px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+    .kpi-cards {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+    .kpi {
+      background: #f0ecff;
+      padding: 25px;
+      border-radius: 10px;
+      flex: 1;
+      margin: 0 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .kpi h3 {
+      color: #3b3054;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .kpi p {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #3b3054;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    h2 {
+      color: #3b3054;
+      margin-top: 40px;
+    }
+    .download-button {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #3b3054;
+      color: white;
+      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-button:hover {
+      background-color: #59418f;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="/static/images/logo_1.png" alt="StyleLane Logo">
+    Admin Dashboard
+  </div>
+
+  <div class="container">
+    <!-- KPI Cards -->
+    <div class="kpi-cards">
+      <div class="kpi">
+        <h3>👤 Total Users</h3>
+        <p>{{ total_users }}</p>
+      </div>
+      <div class="kpi">
+        <h3>📦 Total Products</h3>
+        <p>{{ total_inventory }}</p>
+      </div>
+      <div class="kpi">
+        <h3>🚚 Total Shipments</h3>
+        <p>{{ total_shipments }}</p>
+      </div>
+    </div>
+
+    <!-- Recent Users -->
+    <h2>👥 User List</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr>
+          <td>{{ user.username if user.username else user.UserName }}</td>
+          <td>{{ user.role if user.role else user.Role }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Recent Inventory -->
+    <h2>📋 Inventory Overview</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Store</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in inventory %}
+        <tr>
+          <td>{{ item.ProductID }}</td>
+          <td>{{ item.ProductName }}</td>
+          <td>{{ item.Quantity }}</td>
+          <td>{{ item.StoreID }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div style="text-align: center; margin-bottom: 20px;">
+    <a href="/export-full-report" class="download-button" download>
+      📄 Download Full Performance Report
+    </a>
+  </div>  
+
+</body>
+</html>

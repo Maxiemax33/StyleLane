@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Supplier Dashboard - StyleLane</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+     background: 
+      linear-gradient(to bottom, #3b3054 0%, #ffffff 40%),
+      url('/static/images/fashion_studio.jpg');
+     background-size: cover;
+     background-repeat: no-repeat;
+     background-attachment: fixed;
+     font-family: 'Inter', sans-serif;
+     margin: 0;
+    }
+
+    .header {
+     background: #3b3054;
+     color: #fff;
+     padding: 15px 40px;
+     font-size: 22px;
+     font-weight: 600;
+     display: flex;
+     align-items: center;
+    }
+    
+    .header img {
+     height: 40px;
+     margin-right: 15px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .kpi-cards {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .kpi {
+     background: rgba(255, 255, 255, 0.92);
+     padding: 25px;
+     border-radius: 10px;
+     flex: 1;
+     margin: 0 10px;
+     text-align: center;
+     box-shadow: 0 4px 10px rgba(169, 111, 211, 0.2);
+     position: relative;
+    }
+    
+    .kpi h3 {
+     font-size: 18px;
+     color: #3b3054;
+     margin-bottom: 5px;
+    }
+
+    .kpi p {
+     font-size: 26px;
+     font-weight: 700;
+     color: #2c2c2c;
+     margin: 0;
+    }
+
+    h2 {
+      color: #333;
+      margin-top: 40px;
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    form input {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+
+    form button {
+      grid-column: span 2;
+      padding: 12px;
+      background: #333;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      border: 1px solid #e1e1e1;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .shipment-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 30px;
+     background: #fff;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+     border-radius: 8px;
+     overflow: hidden;
+    }
+
+    .shipment-table th, .shipment-table td {
+     padding: 12px 16px;
+     text-align: center;
+     border-bottom: 1px solid #eee;
+    }
+
+    .shipment-table th {
+     background: #3b3054;
+     color: white;
+     font-weight: 600;
+    }
+
+    .status {
+     padding: 5px 10px;
+     border-radius: 6px;
+     font-weight: bold;
+     font-size: 14px;
+     color: white;
+    }
+
+    .status.in-transit {
+     background-color: #ffa500;
+    }
+
+    .status.pending {
+     background-color: #dc3545;
+    }
+
+    .status.delivered {
+     background-color: #28a745;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+  <img src="/static/images/logo_1.png" alt="StyleLane Logo">
+   Supplier Dashboard
+  </div>
+
+  {% if request.query_params.get('success') == '1' %}
+  <div style="background: #28a745; color: white; padding: 10px 20px; text-align: center; border-radius: 5px; margin: 10px auto; width: 60%;">
+    ✅ Shipment recorded and notification sent!
+  </div>
+  {% endif %}
+
+  <div class="container">
+    <!-- KPI Section -->
+    <div class="kpi-cards">
+      <div class="kpi">
+        <h3>📦 Total Shipments</h3>
+        <p>12</p>
+      </div>
+      <div class="kpi">
+        <h3>🚚 Pending Shipments</h3>
+        <p>3</p>
+      </div>
+      <div class="kpi">
+        <h3>🕒 Last Dispatched</h3>
+        <p>May 7</p>
+      </div>
+    </div>
+
+    <h2>📍 Track Current Shipments</h2>
+    <table class="shipment-table">
+        <thead>
+            <tr>
+            <th>Shipment ID</th>
+            <th>Product ID</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>ETA</th>
+            </tr>
+        </thead>
+    <tbody>
+        <tr>
+        <td>SHIP9083</td>
+        <td>PROD245</td>
+        <td>40</td>
+        <td><span class="status in-transit">In Transit</span></td>
+        <td>May 10</td>
+    </tr>
+    <tr>
+      <td>SHIP9084</td>
+      <td>PROD102</td>
+      <td>15</td>
+      <td><span class="status pending">Pending</span></td>
+      <td>May 12</td>
+    </tr>
+  </tbody>
+</table>
+
+    <!-- Shipment Form -->
+    <h2>Create New Shipment</h2>
+    <form action="/add-shipment" method="post">
+      <input type="text" name="ShipmentID" placeholder="Shipment ID" required>
+      <input type="text" name="ProductID" placeholder="Product ID" required>
+      <input type="number" name="Quantity" placeholder="Quantity" required>
+      <input type="text" name="SupplierID" placeholder="Supplier ID" required>
+      <input type="text" name="StoreID" placeholder="Store ID" required>
+      <select name="Status" required style="padding: 12px; border-radius: 5px; border: 1px solid #ccc;">
+        <option value="Dispatched">Dispatched</option>
+        <option value="Pending">Pending</option>
+        <option value="In Transit">In Transit</option>
+      </select>
+      <button type="submit">Create Shipment</button>
+    </form>
+
+    <h2>Shipment History</h2>
+    <table>
+      <thead>
+        <tr>
+         <th>Shipment ID</th>
+         <th>Product ID</th>
+         <th>Quantity</th>
+         <th>Store ID</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for shipment in shipments %}
+        <tr>
+          <td>{{ shipment.ShipmentID }}</td>
+          <td>{{ shipment.ProductID }}</td>
+          <td>{{ shipment.Quantity }}</td>
+          <td>{{ shipment.StoreID }}</td>
+          <td>
+            <span class="status {{ shipment.Status | lower | replace(' ', '-') }}">
+              {{ shipment.Status }}
+            </span>
+          </td>          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</body>
+</html>

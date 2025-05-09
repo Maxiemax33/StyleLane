@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inventory Manager Dashboard - StyleLane</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: #f7f7f7;
+    }
+    .header {
+      background: #3b3054;
+      color: white;
+      padding: 15px 40px;
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .header img {
+      height: 50px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #333;
+      margin-top: 30px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #3b3054;
+      color: white;
+    }
+    .low-stock {
+      background-color: #ffe6e6;
+      color: #b30000;
+      font-weight: bold;
+    }
+    form {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 10px;
+    }
+    form input, form select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    form button {
+      padding: 10px;
+      background: #3b3054;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .success-banner {
+      background-color: #28a745;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    .inline-form {
+      display: inline;
+    }
+    .mark-btn {
+      padding: 5px 10px;
+      margin-left: 10px;
+      background: #007bff;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="/static/images/logo_1.png" alt="StyleLane Logo">
+    <span>Inventory Manager Dashboard</span>
+  </div>      
+
+  <div class="container">
+
+    {% if request.query_params.get('success') == '1' %}
+    <div class="success-banner">
+      ✅ Quantity updated successfully!
+    </div>
+    {% endif %}
+
+    {% if request.query_params.get('received') == '1' %}
+    <div class="success-banner">
+      ✅ Shipment marked as received successfully!
+    </div>
+    {% endif %}
+
+    <h2>📦 Current Inventory</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Product ID</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Threshold</th>
+          <th>Store</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in inventory %}
+        <tr class="{% if item.Quantity is defined and item.ThresholdQty is defined and item.Quantity|int < item.ThresholdQty|int %}low-stock{% endif %}">
+          <td>{{ item.ProductID }}</td>
+          <td>{{ item.ProductName }}</td>
+          <td>{{ item.Quantity }}</td>
+          <td>{{ item.ThresholdQty }}</td>
+          <td>{{ item.StoreID }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2>🔁 Update Product Quantity</h2>
+    <form method="post" action="/update-qty">
+      <input type="text" name="ProductID" placeholder="Product ID" required>
+      <input type="number" name="Quantity" placeholder="New Quantity" required>
+      <input type="number" name="ThresholdQty" placeholder="Threshold Qty" required>
+      <button type="submit">Update</button>
+    </form>
+
+    <h2>🚚 Incoming Shipments</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Shipment ID</th>
+          <th>Product ID</th>
+          <th>Quantity</th>
+          <th>Supplier</th>
+          <th>Store ID</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ship in shipments %}
+        <tr>
+          <td>{{ ship.ShipmentID }}</td>
+          <td>{{ ship.ProductID }}</td>
+          <td>{{ ship.Quantity }}</td>
+          <td>{{ ship.SupplierID }}</td>
+          <td>{{ ship.StoreID }}</td>
+          <td>
+            {{ ship.Status }}
+            {% if ship.Status != "Received" %}
+            <form action="/mark-received" method="post" class="inline-form">
+              <input type="hidden" name="shipment_id" value="{{ ship.ShipmentID }}">
+              <button type="submit" class="mark-btn">Mark as Received</button>
+            </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>

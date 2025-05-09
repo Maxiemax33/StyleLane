@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #f9f9f9;
+    scroll-behavior: smooth;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 50px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  nav img {
+    height: 45px;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #f06b6b;
+  }
+  
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 80px 60px;
+    background: url('model.jpeg') no-repeat right center / cover;
+    height: 90vh;
+    color: white;
+  }
+  
+  .hero-text {
+    font-family: 'Playfair Display', serif;
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: #fff;
+    max-width: 600px;
+  }
+  
+  .hero-text h1 {
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  
+  .hero-text h1 span {
+    color: #f06b6b;
+  }
+  
+  .hero-subtext {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    color: #222; /* updated for visibility */
+    margin-bottom: 25px;
+    font-weight: 500;
+  }
+  
+  .shop-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 2px solid #000;
+    padding-bottom: 2px;
+    transition: 0.3s ease;
+  }
+  
+  .shop-link:hover {
+    color: #f06b6b;
+    border-color: #f06b6b;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #111;
+    color: white;
+  }
+  
+  .social-icons {
+    margin-top: 10px;
+  }
+  
+  .social-icons a {
+    color: white;
+    margin: 0 10px;
+    font-size: 20px;
+    text-decoration: none;
+  }
+  
