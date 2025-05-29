@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>StyleLane</title>
-  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <nav>
-    <img src="static/images/logo.png" alt="StyleLane Logo">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="StyleLane Logo">
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">About</a></li>
       <li><a href="#">New Arrivals</a></li>
       <li><a href="#">Contact</a></li>
-      <li><a  href="/login" class="btn">Log In</a></li>
+      <li><a href="/login" class="btn">Log In</a></li>
     </ul>
   </nav>
 

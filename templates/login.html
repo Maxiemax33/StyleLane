@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Login - StyleLane</title>
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <style>
       body {
           margin: 0;
           padding: 0;
           font-family: 'Segoe UI', sans-serif;
-          background: url('/static/images/model_1.jpeg') no-repeat center center fixed;
+          background: url("{{ url_for('static', filename='images/model_1.jpeg') }}") no-repeat center center fixed;
           background-size: cover;
       }
-  
+
       .navbar {
           display: flex;
           justify-content: space-between;
@@ -21,11 +21,11 @@
           padding: 15px 40px;
           box-shadow: 0 2px 5px rgba(0,0,0,0.05);
       }
-  
+
       .navbar img {
           height: 40px;
       }
-  
+
       .login-container {
           max-width: 400px;
           margin: 80px auto;
@@ -36,14 +36,14 @@
           box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
           color: white;
       }
-  
+
       h2 {
           text-align: center;
           color: #ffffff;
           margin-bottom: 30px;
           font-weight: 600;
       }
-  
+
       input, select {
           width: 100%;
           padding: 12px;
@@ -55,11 +55,11 @@
           color: white;
           backdrop-filter: blur(4px);
       }
-  
+
       input::placeholder {
           color: #ccc;
       }
-  
+
       button {
           width: 100%;
           background-color: #ffffff;
@@ -72,19 +72,20 @@
           cursor: pointer;
           font-weight: 600;
       }
-  
+
       button:hover {
           background-color: #e5e5e5;
       }
-  
+
       .error {
           color: #ffaaaa;
           text-align: center;
           margin-top: 10px;
       }
+
       select {
-        background-color: #333;         /* Dark background */
-        color: white;                   /* Dropdown text color */
+        background-color: #333;
+        color: white;
         padding: 10px;
         border: none;
         border-radius: 5px;
@@ -95,15 +96,14 @@
       }
 
       select option {
-        background-color: white;       /* Dropdown items background */
-        color: black;                  /* Make dropdown item text black */
+        background-color: white;
+        color: black;
       }
-  </style>
-  
+    </style>
 </head>
 <body>
     <div class="navbar">
-        <img src="/static/images/logo.png" alt="StyleLane">
+        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="StyleLane">
     </div>
 
     <div class="login-container">

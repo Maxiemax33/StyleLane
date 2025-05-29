@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Admin Dashboard - StyleLane</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -96,7 +96,7 @@
 <body>
 
   <div class="header">
-    <img src="/static/images/logo_1.png" alt="StyleLane Logo">
+    <img src="{{ url_for('static', filename='images/logo_1.png') }}" alt="StyleLane Logo">
     Admin Dashboard
   </div>
 
@@ -159,6 +159,7 @@
       </tbody>
     </table>
   </div>
+  
   <div style="text-align: center; margin-bottom: 20px;">
     <a href="/export-full-report" class="download-button" download>
       📄 Download Full Performance Report
